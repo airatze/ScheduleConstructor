@@ -1,0 +1,148 @@
+﻿@model ICollection<ScheduleConstructor.Models.Subject>
+
+<tr>
+    <th>Понедельник</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 1).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 1).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Вторник</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 2).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 2).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Среда</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 3).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 3).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Четверг</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 4).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 4).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Пятница</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 5).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 5).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Суббота</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 6).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 6).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
+
+<tr>
+    <th>Воскресенье</th>
+    <th class="col-sm-1"></th>
+</tr>
+
+@if (Model.Where(s => s.NumberInWeek == 7).Count() == 0)
+{<tr><td>нет занятий</td></tr>}
+
+@foreach (var item in Model.Where(s => s.NumberInWeek == 7).OrderBy(s => s.NumberInDay))
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberInDay)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Lesson.Name)
+        </td>
+    </tr>
+}
