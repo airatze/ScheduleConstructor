@@ -19,7 +19,6 @@ namespace ScheduleConstructor.Data
             _context = context;
         }
 
-        // GET: Groups
         public async Task<IActionResult> Index(string searchString, string currentFilter, int? pageNumber)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -42,7 +41,6 @@ namespace ScheduleConstructor.Data
             return View(await PaginatedList<Group>.CreateAsync(groups.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
-        // GET: Groups/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,7 +50,10 @@ namespace ScheduleConstructor.Data
 
             var @group = await _context.Groups
                 .Include(s => s.Subjects)
+                .ThenInclude(s => s.Audience)
+                .Include(s => s.Subjects)
                 .ThenInclude(s => s.Lesson)
+                .ThenInclude(s => s.Teacher)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@group == null)
@@ -63,15 +64,11 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
-        // GET: Groups/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Groups/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name")] Group @group)
@@ -93,7 +90,6 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
-        // GET: Groups/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,9 +105,6 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
-        // POST: Groups/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Group @group)
@@ -144,7 +137,6 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
-        // GET: Groups/Delete/5
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -168,7 +160,6 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
-        // POST: Groups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

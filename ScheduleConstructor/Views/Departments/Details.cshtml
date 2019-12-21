@@ -1,0 +1,21 @@
+﻿@model ScheduleConstructor.Models.Department
+
+@{
+    ViewData["Title"] = "Кафедра";
+}
+
+<h1>Кафедра</h1>
+
+<div>
+    <h4>Группа @Html.DisplayFor(model => model.Name)</h4>
+
+    <dd class="col-sm-10">
+        <table class="table">
+            @Html.Partial("GroupSummary", Model.Groups)
+        </table>
+    </dd>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Изменить</a> |
+    <a asp-action="Index">Назад</a>
+</div>

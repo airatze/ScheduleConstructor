@@ -1,0 +1,28 @@
+﻿@model ScheduleConstructor.Models.Lesson
+
+@{
+    ViewData["Title"] = "Предмет";
+}
+
+<h1>Предмет</h1>
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Teacher)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Teacher.ID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LessonID">Изменить</a> |
+    <a asp-action="Index">Назад</a>
+</div>

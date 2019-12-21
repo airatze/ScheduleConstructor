@@ -10,10 +10,10 @@ namespace ScheduleConstructor.Models
         public int SubjectID { get; set; }
         public int LessonID { get; set; }
         public int GroupID { get; set; }
-
+        public int AudienceNumber { get; set; }
         public int NumberInDay { get; set; }
         public int NumberInWeek { get; set; }
-          
+        public Audience Audience { get; set; }
         public Lesson Lesson { get; set; }
         public Group Group { get; set; }
     }

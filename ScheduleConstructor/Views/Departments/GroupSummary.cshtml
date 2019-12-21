@@ -1,0 +1,10 @@
+﻿@model ICollection<ScheduleConstructor.Models.Group>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <a href="/Groups/Details/@item.ID">@Html.DisplayFor(modelItem => item.Name)</a>
+        </td>
+    </tr>
+}

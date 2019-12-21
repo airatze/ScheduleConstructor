@@ -1,22 +1,27 @@
-﻿@model ScheduleConstructor.Models.Group
+﻿@model ScheduleConstructor.Models.Lesson
 
 @{
     ViewData["Title"] = "Изменение";
 }
 
-<h1>Изменение</h1>
+    <h1>Изменение</h1>
 
-<h4>Группы</h4>
+<h4>Пара</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="LessonID" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TeacherID" class="control-label"></label>
+                <select asp-for="TeacherID" class="form-control" asp-items="ViewBag.TeacherID"></select>
+                <span asp-validation-for="TeacherID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />
@@ -29,6 +34,3 @@
     <a asp-action="Index">Назад</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

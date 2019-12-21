@@ -9,7 +9,8 @@ namespace ScheduleConstructor.Models
     {
         public int LessonID { get; set; }
         public string Name { get; set; }
-
+        public int TeacherID { get; set; }
+        public Teacher Teacher { get; set; }
         public ICollection<Subject> Subjects { get; set; }
     }
 }

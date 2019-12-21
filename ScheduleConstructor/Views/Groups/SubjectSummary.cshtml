@@ -2,7 +2,7 @@
 
 <tr>
     <th>Понедельник</th>
-    <th class="col-sm-1"></th>
+    @*<th class="col-sm-1"></th>*@
 </tr>
 
 @if (Model.Where(s => s.NumberInWeek == 1).Count() == 0)
@@ -10,15 +10,27 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 1).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.NumberInDay) @Html.DisplayFor(modelItem => item.Lesson.Name) аудитория @Html.DisplayFor(modelItem => item.Audience.Number) @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>*@
+
+</tr>
 }
 
 <tr>
@@ -31,15 +43,23 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 2).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }
 
 <tr>
@@ -52,15 +72,23 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 3).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }
 
 <tr>
@@ -73,15 +101,23 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 4).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }
 
 <tr>
@@ -94,15 +130,23 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 5).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }
 
 <tr>
@@ -115,15 +159,23 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 6).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }
 
 <tr>
@@ -136,13 +188,21 @@
 
 @foreach (var item in Model.Where(s => s.NumberInWeek == 7).OrderBy(s => s.NumberInDay))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumberInDay)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NumberInDay)
+    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Lesson.Name)
-        </td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Lesson.Name)
+    </td>
+
+    <td>
+        аудитория @Html.DisplayFor(modelItem => item.Audience.Number)
+    </td>
+
+    <td>
+        @Html.Partial("TeacherIDtoTeacherName", item.Lesson.Teacher)
+    </td>
+</tr>
 }

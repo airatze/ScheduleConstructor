@@ -1,0 +1,46 @@
+﻿@model ScheduleConstructor.Models.Subject
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Создание пары</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Предмет</label>
+                <select asp-for="LessonID" class="form-control" asp-items="ViewBag.LessonID"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Группа</label>
+                <select asp-for="GroupID" class="form-control" asp-items="ViewBag.GroupID"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Аудитория</label>
+                <select asp-for="AudienceNumber" class="form-control" asp-items="ViewBag.AudienceNumber"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Позиция в дне</label>
+                <input asp-for="NumberInDay" class="form-control" />
+                <span asp-validation-for="NumberInDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Позиция в неделе</label>
+                <input asp-for="NumberInWeek" class="form-control" />
+                <span asp-validation-for="NumberInWeek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ScheduleConstructor.Models.Department>
+
+@{
+    ViewData["Title"] = "Кафедры";
+}
+
+<h1>Кафедры</h1>
+
+<p>
+    <a asp-action="Create">Создать новую кафедру</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                название
+            </th>
+            <th>
+                описание
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Изменить</a> 
+                |
+                <a asp-action="Details" asp-route-id="@item.ID">Группы</a>
+                @*<a href="/Groups?searchString=@item.Groups.Single(g => g.DepartmentID == item.ID).Name">Группы кафедры</a>*@
+                |
+                <a asp-action="Delete" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

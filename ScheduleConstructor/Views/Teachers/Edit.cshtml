@@ -1,4 +1,4 @@
-﻿@model ScheduleConstructor.Models.Group
+﻿@model ScheduleConstructor.Models.Teacher
 
 @{
     ViewData["Title"] = "Изменение";
@@ -6,7 +6,7 @@
 
 <h1>Изменение</h1>
 
-<h4>Группы</h4>
+<h4>Преподаватель</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,6 +29,3 @@
     <a asp-action="Index">Назад</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

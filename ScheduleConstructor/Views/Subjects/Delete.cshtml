@@ -1,0 +1,51 @@
+﻿@model ScheduleConstructor.Models.Subject
+
+@{
+    ViewData["Title"] = "Удалить";
+}
+
+<h1>Удалить</h1>
+
+<h3>Вы действительно хотите удалить эту пару?</h3>
+<div>
+    <h4>Пара</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberInDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberInDay)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberInWeek)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberInWeek)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Lesson)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Lesson.LessonID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Group)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Group.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Audience)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Audience.Number)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SubjectID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Назад</a>
+    </form>
+</div>

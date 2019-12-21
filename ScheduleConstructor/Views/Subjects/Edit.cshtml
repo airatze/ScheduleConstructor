@@ -1,0 +1,50 @@
+﻿@model ScheduleConstructor.Models.Subject
+
+@{
+    ViewData["Title"] = "Изменение";
+}
+
+<h1>Изменение</h1>
+
+<h4>Пара</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SubjectID" />
+            <div class="form-group">
+                <label asp-for="SubjectID" class="control-label"></label>
+                <select asp-for="SubjectID" class="form-control" asp-items="ViewBag.LessonID"></select>
+                <span asp-validation-for="SubjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupID" class="control-label"></label>
+                <select asp-for="GroupID" class="form-control" asp-items="ViewBag.GroupID"></select>
+                <span asp-validation-for="GroupID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Аудитория</label>
+                <select asp-for="AudienceNumber" class="form-control" asp-items="ViewBag.AudienceNumber"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberInDay" class="control-label"></label>
+                <input asp-for="NumberInDay" class="form-control" />
+                <span asp-validation-for="NumberInDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberInWeek" class="control-label"></label>
+                <input asp-for="NumberInWeek" class="form-control" />
+                <span asp-validation-for="NumberInWeek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад</a>
+</div>
+
