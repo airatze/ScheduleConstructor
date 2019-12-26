@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -35,10 +36,9 @@ namespace ScheduleConstructor.Data
                 groups = groups.Where(g => g.Name.Contains(searchString));
             }
 
-
             int pageSize = 3;
             //return View(await _context.AsNoTracking().ToListAsync());
-            return View(await PaginatedList<Group>.CreateAsync(groups.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<Group>.CreateAsync(groups.Include(g => g.Department).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -54,6 +54,7 @@ namespace ScheduleConstructor.Data
                 .Include(s => s.Subjects)
                 .ThenInclude(s => s.Lesson)
                 .ThenInclude(s => s.Teacher)
+                .Include(s => s.Department)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (@group == null)
@@ -64,14 +65,17 @@ namespace ScheduleConstructor.Data
             return View(@group);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "ID", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name")] Group @group)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("Name,DepartmentID")] Group @group)
         {
             try
             {
@@ -81,15 +85,17 @@ namespace ScheduleConstructor.Data
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
+                ViewData["DepartmentID"] = new SelectList(_context.Departments, "ID", "Name", group.DepartmentID);
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Ошибка при добавлении имени, пожалуйста, проверьте данные");
+                ModelState.AddModelError("", "Ошибка при добавлении группы, пожалуйста, проверьте данные");
             }
 
             return View(@group);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -102,12 +108,14 @@ namespace ScheduleConstructor.Data
             {
                 return NotFound();
             }
+            ViewData["DepartmentID"] = new SelectList(_context.Departments, "ID", "Name", group.DepartmentID);
             return View(@group);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Group @group)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,DepartmentID")] Group @group)
         {
             if (id != @group.ID)
             {
@@ -132,11 +140,13 @@ namespace ScheduleConstructor.Data
                         throw;
                     }
                 }
+                ViewData["DepartmentID"] = new SelectList(_context.Departments, "ID", "Name", group.DepartmentID);
                 return RedirectToAction(nameof(Index));
             }
             return View(@group);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -162,6 +172,7 @@ namespace ScheduleConstructor.Data
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var @group = await _context.Groups.FindAsync(id);

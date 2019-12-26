@@ -25,12 +25,12 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Позиция в дне</label>
-                <input asp-for="NumberInDay" class="form-control" />
+                <input asp-for="NumberInDay" class="form-control" value="1" min="1" max="7" step="1" />
                 <span asp-validation-for="NumberInDay" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Позиция в неделе</label>
-                <input asp-for="NumberInWeek" class="form-control" />
+                <input asp-for="NumberInWeek" class="form-control" value="1" min="1" max="7" step="1" />
                 <span asp-validation-for="NumberInWeek" class="text-danger"></span>
             </div>
             <div class="form-group">

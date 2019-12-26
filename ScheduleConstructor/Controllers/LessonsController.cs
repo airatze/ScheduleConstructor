@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,7 +35,7 @@ namespace ScheduleConstructor.Controllers
 
             var lesson = await _context.Lessons
                 .Include(l => l.Teacher)
-                .FirstOrDefaultAsync(m => m.LessonID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (lesson == null)
             {
                 return NotFound();
@@ -43,6 +44,7 @@ namespace ScheduleConstructor.Controllers
             return View(lesson);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["TeacherID"] = new SelectList(_context.Teachers, "ID", "Name");
@@ -51,7 +53,8 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LessonID,Name,TeacherID")] Lesson lesson)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("ID,Name,TeacherID")] Lesson lesson)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,7 @@ namespace ScheduleConstructor.Controllers
             return View(lesson);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +85,10 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LessonID,Name,TeacherID")] Lesson lesson)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,TeacherID")] Lesson lesson)
         {
-            if (id != lesson.LessonID)
+            if (id != lesson.ID)
             {
                 return NotFound();
             }
@@ -97,7 +102,7 @@ namespace ScheduleConstructor.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LessonExists(lesson.LessonID))
+                    if (!LessonExists(lesson.ID))
                     {
                         return NotFound();
                     }
@@ -112,6 +117,7 @@ namespace ScheduleConstructor.Controllers
             return View(lesson);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,7 +127,7 @@ namespace ScheduleConstructor.Controllers
 
             var lesson = await _context.Lessons
                 .Include(l => l.Teacher)
-                .FirstOrDefaultAsync(m => m.LessonID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (lesson == null)
             {
                 return NotFound();
@@ -132,6 +138,7 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var lesson = await _context.Lessons.FindAsync(id);
@@ -142,7 +149,7 @@ namespace ScheduleConstructor.Controllers
 
         private bool LessonExists(int id)
         {
-            return _context.Lessons.Any(e => e.LessonID == id);
+            return _context.Lessons.Any(e => e.ID == id);
         }
     }
 }

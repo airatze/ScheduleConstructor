@@ -7,16 +7,19 @@
 <h1>Предметы</h1>
 
 <p>
-    <a asp-action="Create">Создать предмет</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create">Создать предмет</a>
+    }
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Имя
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Teacher)
+                Преподаватель
             </th>
             <th></th>
         </tr>
@@ -31,9 +34,15 @@
                 @Html.DisplayFor(modelItem => item.Teacher.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.LessonID">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.LessonID">Подробнее</a> |
-                <a asp-action="Delete" asp-route-id="@item.LessonID">Удалить</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.ID">Изменить</a>
+                }
+                <a asp-action="Details" asp-route-id="@item.ID">Подробнее</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ID">Удалить</a>
+                }
             </td>
         </tr>
 }

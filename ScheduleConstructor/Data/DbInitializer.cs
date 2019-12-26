@@ -17,6 +17,18 @@ namespace ScheduleConstructor.Data
                 return;
             }
 
+            var users = new User[]
+            {
+                new User{ Login = "Admin", Password = "1234" },
+                new User{ Login = "Admin2", Password = "qwerty" }
+            };
+
+            foreach(User u in users)
+            {
+                context.Users.Add(u);
+            }
+            context.SaveChanges();
+
             var department = new Department[]
             {
                 new Department{ Name = "физмат" }
@@ -109,11 +121,11 @@ namespace ScheduleConstructor.Data
 
             var subjects = new Subject[]
             {
-                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Web-программирование").LessonID, NumberInDay = 1, NumberInWeek = 1, AudienceNumber = 101 },
-                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Программирование").LessonID, NumberInDay = 1, NumberInWeek = 2, AudienceNumber = 102 },
-                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "История").LessonID, NumberInDay = 1, NumberInWeek = 3, AudienceNumber = 103 },
-                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Математика").LessonID, NumberInDay = 1, NumberInWeek = 4, AudienceNumber = 104 },
-                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Физика").LessonID, NumberInDay = 1, NumberInWeek = 5, AudienceNumber = 105 },
+                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Web-программирование").ID, NumberInDay = 1, NumberInWeek = 1, AudienceNumber = 101 },
+                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Программирование").ID, NumberInDay = 1, NumberInWeek = 2, AudienceNumber = 102 },
+                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "История").ID, NumberInDay = 1, NumberInWeek = 3, AudienceNumber = 103 },
+                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Математика").ID, NumberInDay = 1, NumberInWeek = 4, AudienceNumber = 104 },
+                new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = lessons.Single(l => l.Name == "Физика").ID, NumberInDay = 1, NumberInWeek = 5, AudienceNumber = 105 },
 
                 new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = 4, NumberInDay = 2, NumberInWeek = 1, AudienceNumber = 102 },
                 new Subject{ GroupID = groups.Single(g => g.Name == "ПИ1").ID, LessonID = 3, NumberInDay = 2, NumberInWeek = 2, AudienceNumber = 103 },

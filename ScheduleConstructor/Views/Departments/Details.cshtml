@@ -16,6 +16,10 @@
     </dd>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Изменить</a> |
+    @if (User.Identity.IsAuthenticated)
+    {
+    <a asp-action="Edit" asp-route-id="@Model.ID">Изменить</a>
+    <a href="/Groups/Create">Добавить группу</a>
+    }
     <a asp-action="Index">Назад</a>
 </div>

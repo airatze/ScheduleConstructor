@@ -18,7 +18,9 @@
         </table>
     </dd>
 </div>
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Изменить</a> |
-    <a asp-action="Index">Назад</a>
-</div>*@
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+    <a href="/Subjects/Create">Добавить пару</a>
+    }
+</div>

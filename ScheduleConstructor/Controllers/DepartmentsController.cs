@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace ScheduleConstructor.Controllers
             return View(department);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -49,6 +51,7 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ID,Name,Description")] Department department)
         {
             if (ModelState.IsValid)
@@ -60,6 +63,7 @@ namespace ScheduleConstructor.Controllers
             return View(department);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,6 +81,7 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description")] Department department)
         {
             if (id != department.ID)
@@ -107,6 +112,7 @@ namespace ScheduleConstructor.Controllers
             return View(department);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,6 +132,7 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var department = await _context.Departments.FindAsync(id);

@@ -7,47 +7,59 @@
 <h1>Пары</h1>
 
 <p>
-    <a asp-action="Create">Создать новую пару</a>
+    @if (User.Identity.IsAuthenticated)
+    {<a asp-action="Create">Создать новую пару</a>}
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NumberInDay)
+                Номер дня
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberInWeek)
+                Номер недели
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lesson)
+                Предмет
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Group)
+                Аудитория
+            </th>
+            <th>
+                Группа
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberInDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberInWeek)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lesson.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Group.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SubjectID">Изменить</a> |
-                <a asp-action="Details" asp-route-id="@item.SubjectID">Подробнее</a> |
-                <a asp-action="Delete" asp-route-id="@item.SubjectID">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberInDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberInWeek)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lesson.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AudienceNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Group.Name)
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {<a asp-action="Edit" asp-route-id="@item.SubjectID">Изменить</a>}
+
+                    <a asp-action="Details" asp-route-id="@item.SubjectID">Подробнее</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {<a asp-action="Delete" asp-route-id="@item.SubjectID">Удалить</a>}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

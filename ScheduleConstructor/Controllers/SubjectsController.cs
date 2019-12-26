@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -44,16 +45,18 @@ namespace ScheduleConstructor.Controllers
             return View(subject);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["GroupID"] = new SelectList(_context.Groups, "ID", "Name");
-            ViewData["LessonID"] = new SelectList(_context.Lessons, "LessonID", "Name");
+            ViewData["LessonID"] = new SelectList(_context.Lessons, "ID", "Name");
             ViewData["AudienceNumber"] = new SelectList(_context.Audiences, "Number", "Number");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("SubjectID,LessonID,GroupID,NumberInDay,NumberInWeek,AudienceNumber")] Subject subject)
         {
             if (ModelState.IsValid)
@@ -63,7 +66,7 @@ namespace ScheduleConstructor.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GroupID"] = new SelectList(_context.Groups, "ID", "Name", subject.GroupID);
-            ViewData["LessonID"] = new SelectList(_context.Lessons, "LessonID", "Name", subject.LessonID);
+            ViewData["LessonID"] = new SelectList(_context.Lessons, "ID", "Name", subject.LessonID);
             ViewData["AudienceNumber"] = new SelectList(_context.Audiences, "Number", "Number", subject.AudienceNumber);
 
             return View(subject);
@@ -82,7 +85,7 @@ namespace ScheduleConstructor.Controllers
                 return NotFound();
             }
             ViewData["GroupID"] = new SelectList(_context.Groups, "ID", "Name", subject.GroupID);
-            ViewData["LessonID"] = new SelectList(_context.Lessons, "LessonID", "Name", subject.LessonID);
+            ViewData["LessonID"] = new SelectList(_context.Lessons, "ID", "Name", subject.LessonID);
             ViewData["AudienceNumber"] = new SelectList(_context.Audiences, "Number", "Number", subject.AudienceNumber);
             return View(subject);
         }
@@ -117,11 +120,12 @@ namespace ScheduleConstructor.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GroupID"] = new SelectList(_context.Groups, "ID", "Name", subject.GroupID);
-            ViewData["LessonID"] = new SelectList(_context.Lessons, "LessonID", "Name", subject.LessonID);
+            ViewData["LessonID"] = new SelectList(_context.Lessons, "ID", "Name", subject.LessonID);
             ViewData["AudienceNumber"] = new SelectList(_context.Audiences, "Number", "Number", subject.AudienceNumber);
             return View(subject);
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -143,6 +147,7 @@ namespace ScheduleConstructor.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var subject = await _context.Subjects.FindAsync(id);
